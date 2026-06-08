@@ -400,6 +400,9 @@ function login() {
     const error = document.getElementById('errorCross');
     const loading = document.getElementById('loadingSpinner');
 
+    const successSound = document.getElementById('successSound');
+    const errorSound = document.getElementById('errorSound');
+
     // Reset
     success.style.display = 'none';
     error.style.display = 'none';
@@ -418,6 +421,10 @@ function login() {
             if (result.success) {
                 loading.style.display = 'none';
                 success.style.display = 'flex';
+
+                // Putar suara berhasil
+                successSound.currentTime = 0;
+                successSound.play();
                 
                 setTimeout(() => {
                     document.getElementById('loginPage').style.display = 'none';
@@ -428,6 +435,10 @@ function login() {
             } else {
                 loading.style.display = 'none';
                 error.style.display = 'flex';
+                
+                // Putar suara gagal
+                errorSound.currentTime = 0;
+                errorSound.play();
                 setTimeout(() => error.style.display = 'none', 2000);
             }
         } catch (err) {
@@ -435,6 +446,9 @@ function login() {
             if (username === 'admin' && password === '123') {
                 loading.style.display = 'none';
                 success.style.display = 'flex';
+
+                successSound.currentTime = 0;
+                successSound.play();
                 setTimeout(() => {
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('app').style.display = 'block';
@@ -444,6 +458,9 @@ function login() {
             } else {
                 loading.style.display = 'none';
                 error.style.display = 'flex';
+                
+                errorSound.currentTime = 0;
+                errorSound.play();
                 setTimeout(() => error.style.display = 'none', 2000);
             }
         }
