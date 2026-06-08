@@ -1,3 +1,5 @@
+// kode nilai awal untuk aplikasi kasir
+
 class KasirPro {
     constructor() {
         this.currentNumber = '0';
