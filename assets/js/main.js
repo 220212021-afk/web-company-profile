@@ -1,4 +1,4 @@
-// kode nilai awal untuk aplikasi kasir
+// kode nilai awal dan akhir untuk aplikasi kasir
 
 class KasirPro {
     constructor() {
