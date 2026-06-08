@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasir Pro - Sistem Kasir Modern AI</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-text">Loading AI System...</div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page">
+        <div class="login-bg">
+            <div class="bg-animation"></div>
+            <div class="bg-animation delay-1"></div>
+            <div class="bg-animation delay-2"></div>
+        </div>
+        
+        <div class="login-container">
+            <div class="login-card glassmorphism">
+                <div class="logo">
+                    <i class="fas fa-cash-register"></i>
+                    <h1>Kasir <span class="gradient-text">Pro</span></h1>
+                </div>
+                
+                <div id="loginForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Username" autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password">
+                    </div>
+                    <button class="btn-gradient" onclick="login()">
+                        <span>Login</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Animations -->
+                <div id="successCheck" class="success-animation">
+                    <div class="success-circle">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div id="errorCross" class="error-animation">
+                    <div class="error-circle">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div id="loadingSpinner" class="loading-animation">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <i class="fas fa-cash-register header-icon"></i>
+                <h1>Kasir Pro <span class="status-badge online"></span></h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <i class="fas fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Calculator -->
+        <div class="calculator-section">
+            <div class="calc-display">
+                <div class="calc-output" id="displaynumber">0</div>
+            </div>
+            <div class="calc-grid">
+                <button class="calc-btn" data-value="7">7</button>
+                <button class="calc-btn" data-value="8">8</button>
+                <button class="calc-btn" data-value="9">9</button>
+                <button class="calc-btn operator" data-value="/">÷</button>
+                <button class="calc-btn" data-value="4">4</button>
+                <button class="calc-btn" data-value="5">5</button>
+                <button class="calc-btn" data-value="6">6</button>
+                <button class="calc-btn operator" data-value="-">-</button>
+                <button class="calc-btn" data-value="1">1</button>
+                <button class="calc-btn" data-value="2">2</button>
+                <button class="calc-btn" data-value="3">3</button>
+                <button class="calc-btn operator" data-value="+">+</button>
+                <button class="calc-btn clear" data-value="CE">CE</button>
+                <button class="calc-btn zero" data-value="0">0</button>
+                <button class="calc-btn operator" data-value="*">×</button>
+                <button class="calc-btn equals" data-value="=">=</button>
+            </div>
+        </div>
+
+        <!-- Kasir Form -->
+        <div class="kasir-section">
+            <div class="form-card glassmorphism">
+                <h3><i class="fas fa-plus"></i> Tambah Barang</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <i class="fas fa-box"></i>
+                        <input type="text" id="namaBarang" placeholder="Nama Barang">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-tag"></i>
+                        <input type="number" id="hargaBarang" placeholder="Harga">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-hashtag"></i>
+                        <input type="number" id="jumlahBarang" placeholder="Jumlah">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="tambahBarang()">
+                    <i class="fas fa-cart-plus"></i> Tambah
+                </button>
+            </div>
+
+            <!-- Table -->
+            <div class="table-card glassmorphism">
+                <div class="table-header">
+                    <h3><i class="fas fa-list"></i> Daftar Barang</h3>
+                    <button class="btn-small" onclick="lihatLaporan()">
+                        <i class="fas fa-chart-bar"></i> Laporan
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table id="tableBarang">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th>Jumlah</th>
+                                <th>Total</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listBarang"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="summary-grid">
+                <div class="summary-card glassmorphism">
+                    <h4>Total Belanja</h4>
+                    <div class="amount" id="totalBelanja">Rp 0</div>
+                </div>
+                <div class="summary-card glassmorphism">
+                    <div class="input-group small">
+                        <input type="number" id="diskon" placeholder="Diskon %">
+                    </div>
+                    <button class="btn-small" onclick="hitungDiskon()">Hitung</button>
+                </div>
+                <div class="summary-card glassmorphism">
+                    <h4>Total Akhir</h4>
+                    <div class="amount final" id="totalAkhir">Rp 0</div>
+                </div>
+            </div>
+
+            <!-- Payment -->
+            <div class="payment-card glassmorphism">
+                <h3><i class="fas fa-credit-card"></i> Pembayaran</h3>
+                <div class="input-group">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <input type="number" id="bayar" placeholder="Uang Bayar">
+                </div>
+                <button class="btn-success" onclick="hitungKembalian()">
+                    <i class="fas fa-calculator"></i> Hitung Kembalian
+                </button>
+                <div class="payment-result">
+                    <h4>Kembalian: <span class="amount" id="kembalian">Rp 0</span></h4>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-success" onclick="cetakStruk()">
+                        <i class="fas fa-print"></i> Cetak Struk
+                    </button>
+                    <button class="btn-info" onclick="simpanTransaksi()">
+                        <i class="fas fa-save"></i> Simpan Transaksi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="successSound" src="assets/audio/success.mp3"></audio>
+    <audio id="errorSound" src="assets/audio/error.mp3"></audio>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
